@@ -18,9 +18,12 @@ Func _WinMainInit()
    Global $iGroupFontWeight = 560
 
    ; ### WINDOW ###
+   ; Optimal window size
+   Global $iWinMainOptimalWidth  = 640
+   Global $iWinMainOptimalHeight = 740
    ; Window size
-   Global $iWinMainWidth  = 640
-   Global $iWinMainHeight = 690
+   Global $iWinMainWidth  = $iWinMainOptimalWidth
+   Global $iWinMainHeight = $iWinMainOptimalHeight
 
    ; ### GROUPS ###
    ; Horizontal margins.
@@ -97,8 +100,8 @@ EndFunc
 Func _WinMainCalibrate()
    ; Get window size.
    $aiWinMainSize = WinGetClientSize($hWinMain)
-   $iWinMainWidth = $aiWinMainSize[0]
-   $iWinMainHeight = $aiWinMainSize[1]
+   $iWinMainWidth = $aiWinMainSize[0] < $iWinMainOptimalWidth ? $iWinMainOptimalWidth : $aiWinMainSize[0]
+   $iWinMainHeight = $aiWinMainSize[1] < $iWinMainOptimalHeight ? $iWinMainOptimalHeight : $aiWinMainSize[1]
    ; Calibrate font.
    ;If Not StringCompare($sTheme, "Donker") Then
 	  ;$iWinBKColor     = 0x000000
@@ -151,7 +154,7 @@ Func _WinMainCreate()
    Global $aidControls[] = [0]
 
    Global $hWinMain = GUICreate("Verwerking uitgaande post", $iWinMainWidth, $iWinMainHeight, Default, Default, $WS_MINIMIZEBOX + $WS_CAPTION + $WS_POPUP + $WS_SYSMENU + $WS_MAXIMIZEBOX + $WS_SIZEBOX)
-   _GUIScrollBars_EnableScrollBar($hWinMain, $SB_VERT, $ESB_ENABLE_BOTH)
+	  _GUIScrollbars_Generate($hWinMain, $iWinMainOptimalWidth, $iWinMainOptimalHeight)
 	  GUISetIcon($sProgramLogo)
 	  Opt("GUIResizeMode", $GUI_DOCKBORDERS)
 	  Global $idMenuView = GUICtrlCreateMenu("Beeld")
@@ -169,8 +172,8 @@ Func _WinMainCreate()
 			;If Not StringCompare($sTheme, "Dark") Then GUICtrlSetState(Default, $GUI_CHECKED)
 	  Global $idMenuHelp = GUICtrlCreateMenu("Help")
 		 Global $idAbout = GUICtrlCreateMenuItem("Over Postcentrale", $idMenuHelp)
+	  Opt("GUIResizeMode", $GUI_DOCKALL)
 	  Global $idTab = GUICtrlCreateTab(0, 0, $iWinMainWidth + 2, $iWinMainHeight - 19)
-		 Opt("GUIResizeMode", $GUI_DOCKALL)
 		 GUICtrlCreateTabItem("Aanmaken")
 			; 1 To
 			Global $idGroupTo = GUICtrlCreateGroup("Bestemmeling", Default, Default)
@@ -434,8 +437,10 @@ EndFunc
 ; # DRAW MAIN WINDOW #
 ; ####################
 Func _WinMainDraw()
+   _GUIScrollbars_Scroll_Page($hWinMain, 1, 1)
    _WinMainCalibrate()
    GUISetState(@SW_LOCK, $hWinMain)
+   GUICtrlSetPos($idTab, 0, 0, $iWinMainWidth, $iWinMainHeight)
    GUICtrlSetPos($idGroupTo, $iGroupMarginLeft, $iGroupMarginTop, $iGroupWidth1, $iGroupHeight1)
 	  $iLabelOffsetLeft = $iGroupMarginLeft + $iLabelMarginLeft
 	  $iLabelOffsetTop = $iGroupMarginTop + $iLabelMarginTop
@@ -554,6 +559,7 @@ Func _WinMainDraw()
 	  GUICtrlSetState($idDatabaseOpen, $GUI_DISABLE)
 	  GUICtrlSetState($idDatabasePrint, $GUI_DISABLE)
    EndIf
+   _GUIScrollbars_Generate($hWinMain, $iWinMainOptimalWidth, $iWinMainOptimalHeight)
 EndFunc
 
 

@@ -50,7 +50,7 @@ SOFTWARE.
 #pragma compile(LegalTrademarks,      ""                                                                             )
 #pragma compile(OriginalFilename,     ""                                                                             )
 #pragma compile(ProductName,          "Postcentrale"                                                                 )
-#pragma compile(ProductVersion,       "0.12"                                                                         )
+#pragma compile(ProductVersion,       "0.13"                                                                         )
 
 Global $sProgramLogo = _TempFile()
 FileInstall("resources\postcentrale.ico", $sProgramLogo)
@@ -87,6 +87,8 @@ $sVersion = FileGetVersion(@ScriptFullPath, "ProductVersion")
 #include <WinAPIFiles.au3>
 #include <WindowsConstants.au3>
 #include <Word.au3>
+
+#include "GUIScrollbars_Ex.au3"
 
 #include "Check.au3"
 #include "Control.au3"
