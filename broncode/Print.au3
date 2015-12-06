@@ -34,6 +34,8 @@ Func _Print()
 	   $sPrinter = ""
    EndIf
 
+   $sSumatraPDFArguments = GUICtrlRead($idDatabaseSumatraPDFArguments)
+
    $bError = False
    For $j = 1 To $iCopies
 	  For $i = 1 To $aDatabaseLetters[0][0]
@@ -46,9 +48,9 @@ Func _Print()
 			   _Word_DocClose($oDoc)
 			   If $aDatabaseLetters[$i][6] Then
 				  If Not StringCompare($sPrinter, "") Then
-					 RunWait(@ComSpec & " /c " & 'SumatraPDF -print-to-default "' & $sDatabase & "\" & $aDatabaseLetters[$i][1] & '.pdf"', @ScriptDir, @SW_HIDE)
+					 RunWait(@ComSpec & " /c " & 'SumatraPDF -print-to-default ' & $sSumatraPDFArguments & ' "' & $sDatabase & "\" & $aDatabaseLetters[$i][1] & '.pdf"', @ScriptDir, @SW_HIDE)
 				  Else
-					 RunWait(@ComSpec & " /c " & 'SumatraPDF -print-to "' & $sPrinter & '" "' & $sDatabase & "\" & $aDatabaseLetters[$i][1] & '.pdf"', @ScriptDir, @SW_HIDE)
+					 RunWait(@ComSpec & " /c " & 'SumatraPDF -print-to "' & $sPrinter & '" ' & $sSumatraPDFArguments & ' "' & $sDatabase & "\" & $aDatabaseLetters[$i][1] & '.pdf"', @ScriptDir, @SW_HIDE)
 				  EndIf
 				  If @error Then $bError = True
 				  Sleep($iPrintPause)

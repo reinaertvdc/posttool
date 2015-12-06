@@ -111,12 +111,12 @@ Func _FormCheck()
 	  MsgBox($iErrorStyle, $sErrorTitle, "Datum vereist.")
 	  $bValid = False
    EndIf
-   If $bValid And (Not StringLen($sFromDate) = 10 Or Not StringIsDigit(StringMid($sFromDate, 1, 2)) Or StringCompare(StringMid($sFromDate, 3, 1), "/") Or _
-	  Not StringIsDigit(StringMid($sFromDate, 4, 2)) Or StringCompare(StringMid($sFromDate, 6, 1), "/") Or _
-	  Not StringIsDigit(StringMid($sFromDate, 7, 4))) Then
-	  MsgBox($iErrorStyle, $sErrorTitle, "Geldige Datum vereist." & @CRLF & @CRLF & "Formaat: 7/03/2014")
-	  $bValid = False
-   EndIf
+   ;If $bValid And (Not StringLen($sFromDate) = 10 Or Not StringIsDigit(StringMid($sFromDate, 1, 2)) Or StringCompare(StringMid($sFromDate, 3, 1), "/") Or _
+   ;  Not StringIsDigit(StringMid($sFromDate, 4, 2)) Or StringCompare(StringMid($sFromDate, 6, 1), "/") Or _
+   ;  Not StringIsDigit(StringMid($sFromDate, 7, 4))) Then
+   ;  MsgBox($iErrorStyle, $sErrorTitle, "Geldige Datum vereist." & @CRLF & @CRLF & "Formaat: 7/03/2014")
+   ;  $bValid = False
+   ;EndIf
    ; Ref
 	  ; Always valid
    ; ### OPTIONS ###

@@ -344,6 +344,10 @@ Func _DatabaseLoadLetters()
    $sSearchID = GUICtrlRead($idDatabaseDate)
    If StringLen($sSearchID) = 9 Then $sSearchID = "0" & $sSearchID
    $sSearchID = StringMid($sSearchID, 7, 4) & StringMid($sSearchID, 4, 2) & StringMid($sSearchID, 1, 2) & "0001"
+   if Not StringIsDigit($sSearchID) Then
+	  $sSearchID = GUICtrlRead($idDatabaseDate)
+	  $sSearchID = StringMid($sSearchID, 1, 4) & StringMid($sSearchID, 6, 2) & StringMid($sSearchID, 9, 2) & "0001"
+   EndIf
    Local $asHeading[][] = [["Registratienummer", _
 							"Onderwerp", _
 							"Vertrouwelijk", _

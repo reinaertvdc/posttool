@@ -50,7 +50,7 @@ SOFTWARE.
 #pragma compile(LegalTrademarks,      ""                                                                             )
 #pragma compile(OriginalFilename,     ""                                                                             )
 #pragma compile(ProductName,          "Postcentrale"                                                                 )
-#pragma compile(ProductVersion,       "0.13"                                                                         )
+#pragma compile(ProductVersion,       "0.14"                                                                         )
 
 Global $sProgramLogo = _TempFile()
 FileInstall("resources\postcentrale.ico", $sProgramLogo)
