@@ -23,7 +23,7 @@ EndFunc
 ; #################
 Func _ReadSettings()
    ; Read database location.
-   Global $sDatabase = _ArrayToString(IniReadSection($sSettingsFile, "Database"), "", 1, 0, "|", 1, 1)
+   Global $sDatabase = _ArrayToString(IniReadSection($sSettingsFile, "Database"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sDatabase, "") Then
 	  MsgBox($MB_ICONWARNING, "Database locatie", "Geen database locatie gevonden. Selecteer een map in het volgende menu.")
 	  $sDatabase = FileSelectFolder("Database locatie selecteren", "")
@@ -99,21 +99,21 @@ Func _ReadSettings()
 	  FileCopy($sDatabase & "\patches\agb.doc", "sjablonen\agb.doc")
    EndIf
    ; Read print.
-   Global $sPrint = _ArrayToString(IniReadSection($sSettingsFile, "Print"), "", 1, 0, "|", 1, 1)
+   Global $sPrint = _ArrayToString(IniReadSection($sSettingsFile, "Print"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sPrint, "") Then
 	  $sPrint = "Nee"
 	  IniWriteSection($sSettingsFile, "Print", "    =" & $sPrint)
    EndIf
    $sPrint = StringInStr($sPrint, "|")? StringLeft($sPrint, StringInStr($sPrint, "|") - 1) : $sPrint
    ; Read pause between prints.
-   Global $iPrintPause = _ArrayToString(IniReadSection($sSettingsFile, "PrintPauze"), "", 1, 0, "|", 1, 1)
+   Global $iPrintPause = _ArrayToString(IniReadSection($sSettingsFile, "PrintPauze"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($iPrintPause, "") Then
 	  $iPrintPause = "3000"
 	  IniWriteSection($sSettingsFile, "PrintPauze", "    =" & $iPrintPause)
    EndIf
    $iPrintPause = Int(StringInStr($iPrintPause, "|")? StringLeft($iPrintPause, StringInStr($iPrintPause, "|") - 1) : $iPrintPause)
    ; Read font size.
-   Global $sFontSize = _ArrayToString(IniReadSection($sSettingsFile, "Lettergrootte"), "", 1, 0, "|", 1, 1)
+   Global $sFontSize = _ArrayToString(IniReadSection($sSettingsFile, "Lettergrootte"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sFontSize, "") Then
 	  $sFontSize = "Normaal"
 	  IniWriteSection($sSettingsFile, "Lettergrootte", "    =" & $sFontSize)
@@ -126,13 +126,13 @@ Func _ReadSettings()
 	  ;IniWrite($sSettingsFile, "Beeld", "Thema", $sTheme)
    ;EndIf
    ; Read salutions.
-   Global $sSalutions = _ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1, 0, "|", 1, 1)
+   Global $sSalutions = _ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sSalutions, "") Then
 	  $sSalutions = "geachte heer|geachte mevrouw|geachte"
 	  IniWriteSection($sSettingsFile, "Aansprekingen", "    =" & StringReplace($sSalutions, "|", @LF & "    ="))
    EndIf
    ; Read 'Gemeente' departments.
-   Global $sGemeente = _ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1, 0, "|", 1, 1)
+   Global $sGemeente = _ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sGemeente, "") Then
 	  $sGemeente = "archief|" & _
 				   "burgemeester|" & _
@@ -165,7 +165,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "Gemeente", "    =" & StringReplace($sGemeente, "|", @LF & "    ="))
    EndIf
    ; Read 'OCMW' departments.
-   Global $sOCMW = _ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1, 0, "|", 1, 1)
+   Global $sOCMW = _ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sOCMW, "") Then
 	  $sOCMW = "de dreef|" & _
 			   "dienst financiën|" & _
@@ -182,7 +182,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "OCMW", "    =" & StringReplace($sOCMW, "|", @LF & "    ="))
    EndIf
    ; Read 'AGB' departments.
-   Global $sAGB = _ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1, 0, "|", 1, 1)
+   Global $sAGB = _ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sAGB, "") Then
 	  $sAGB = "directiecomité|" & _
 			  "raad van bestuur"
