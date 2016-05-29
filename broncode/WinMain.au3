@@ -180,90 +180,98 @@ Func _WinMainCreate()
 			_ArrayAdd($aidGroups, $idGroupTo)
 			   ; 1 Org
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Organisatie", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToOrg = GUICtrlCreateInput("", Default, Default)
+			   Global $idToOrg = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Organisatie", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToOrg)
 			   ; 2 Salutation
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Aanspreking", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idToSalution = GUICtrlCreateCombo("", Default, Default, Default, Default, $CBS_DROPDOWNLIST)
 			   _ArrayAdd($aidControls, $idToSalution)
-			   GUICtrlSetData($idToSalution, $sSalutions, StringLeft($sSalutions, Not StringInStr($sSalutions, "|")? StringLen($sSalutions) : StringInStr($sSalutions, "|") - 1))
+			   GUICtrlSetData($idToSalution, $sSalutions, IniRead($sSettingsFile, "Bestemmeling", "Aanspreking", ""))
 			   ; 3 FirstName
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Voornaam", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToFirstName = GUICtrlCreateInput("", Default, Default)
+			   Global $idToFirstName = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Voornaam", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToFirstName)
 			   ; 4 Surname
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Achternaam", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToSurname = GUICtrlCreateInput("", Default, Default)
+			   Global $idToSurname = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Achternaam", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToSurname)
 			   ; 5 Street
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Straatnaam", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToStreet = GUICtrlCreateInput("", Default, Default)
+			   Global $idToStreet = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Straatnaam", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToStreet)
 			   ; 6 Number
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Huisnummer", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToNumber = GUICtrlCreateInput("", Default, Default)
+			   Global $idToNumber = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Huisnummer", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToNumber)
 			   ; 7 Bus
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Bus", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToBus = GUICtrlCreateInput("", Default, Default)
+			   Global $idToBus = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Bus", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToBus)
 			   ; 8 Postcode
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Postcode", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToPostcode = GUICtrlCreateInput("", Default, Default)
+			   Global $idToPostcode = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Postcode", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToPostcode)
 			   ; 9 City
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Gemeente", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idToCity = GUICtrlCreateInput("", Default, Default)
+			   Global $idToCity = GUICtrlCreateInput(IniRead($sSettingsFile, "Bestemmeling", "Gemeente", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idToCity)
 			   ; 10 Country
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Land", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idToCountry = GUICtrlCreateCombo("", Default, Default, Default, Default, $CBS_DROPDOWNLIST)
 			   _ArrayAdd($aidControls, $idToCountry)
-			   GUICtrlSetData($idToCountry, $sCountries, "België")
+			   GUICtrlSetData($idToCountry, $sCountries, IniRead($sSettingsFile, "Bestemmeling", "Land", ""))
 			   ; 11 Ref
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Uw kenmerk", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idToRef = GUICtrlCreateInput("", Default, Default)
 			   _ArrayAdd($aidControls, $idToRef)
+			   ; 12 Clear
+			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("", Default, Default, Default, Default, $SS_RIGHT))
+			   Global $idToClear = GUICtrlCreateButton("Leegmaken", Default, Default)
+			   _ArrayAdd($aidControls, $idToClear)
 			; 2 From
 			Global $idGroupContact = GUICtrlCreateGroup("Afzender", Default, Default)
 			_ArrayAdd($aidGroups, $idGroupContact)
-			   ; 12 Org
+			   ; 13 Org
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Organisatie", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromOrg = GUICtrlCreateCombo("", Default, Default, Default, Default, $CBS_DROPDOWNLIST)
 			   _ArrayAdd($aidControls, $idFromOrg)
 			   GUICtrlSetData($idFromOrg, $sOrgs, IniRead($sSettingsFile, "Afzender", "Organisatie", ""))
-			   ; 13 FirstName
+			   ; 14 FirstName
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Voornaam", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromFirstName = GUICtrlCreateInput(IniRead($sSettingsFile, "Afzender", "Voornaam", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idFromFirstName)
-			   ; 14 Surname
+			   ; 15 Surname
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Achternaam", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromSurname = GUICtrlCreateInput(IniRead($sSettingsFile, "Afzender", "Achternaam", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idFromSurname)
-			   ; 15 Department
+			   ; 16 Department
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Dienst", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromDepartment = GUICtrlCreateCombo("", Default, Default, Default, Default, $CBS_DROPDOWNLIST)
 			   _ArrayAdd($aidControls, $idFromDepartment)
-			   ; 16 Tel
+			   ; 17 Tel
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Telefoon", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromTel = GUICtrlCreateInput(IniRead($sSettingsFile, "Afzender", "Telefoon", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idFromTel)
-			   ; 17 Email
+			   ; 18 Email
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("E-mailadres", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromEmail = GUICtrlCreateInput(IniRead($sSettingsFile, "Afzender", "Email", ""), Default, Default)
 			   _ArrayAdd($aidControls, $idFromEmail)
-			   ; 18 Subject
+			   ; 19 Subject
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Onderwerp", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromSubject = GUICtrlCreateInput("", Default, Default)
 			   _ArrayAdd($aidControls, $idFromSubject)
-			   ; 19 Date
+			   ; 20 Date
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Datum", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromDate = GUICtrlCreateDate("", Default, Default, Default, Default, $DTS_SHORTDATEFORMAT)
 			   _ArrayAdd($aidControls, $idFromDate)
-			   ; 20 Ref
+			   ; 21 Ref
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Ons kenmerk", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idFromRef = GUICtrlCreateInput("#ID", Default, Default)
 			   _ArrayAdd($aidControls, $idFromRef)
+			   ; 22 Clear
+			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("", Default, Default, Default, Default, $SS_RIGHT))
+			   Global $idFromClear = GUICtrlCreateButton("Leegmaken", Default, Default)
+			   _ArrayAdd($aidControls, $idFromClear)
 			; 3 Options
 			Global $idGroupOptions = GUICtrlCreateGroup("Opties", Default, Default)
 			_ArrayAdd($aidGroups, $idGroupOptions)
@@ -273,16 +281,16 @@ Func _WinMainCreate()
 			   ; 5 Confidential
 			   Global $idOptionsConfidential = GUICtrlCreateCheckbox("Vertrouwelijk", Default, Default)
 			   _ArrayAdd($aidCheckboxes, $idOptionsConfidential)
-			   ; 23 Annex
+			   ; 24 Annex
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Bijlage", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idOptionsAnnex = GUICtrlCreateInput("", Default, Default)
 			   _ArrayAdd($aidControls, $idOptionsAnnex)
 			   Global $idOptionsExplorer = GUICtrlCreateButton("...", Default, Default)
-			   ; 24 Ref
+			   ; 25 Ref
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Opmerking", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idOptionsRemark = GUICtrlCreateInput("", Default, Default)
 			   _ArrayAdd($aidControls, $idOptionsRemark)
-			   ; 24 Signed
+			   ; 26 Signed
 			   Global $idOptionsSigned = GUICtrlCreateCheckbox("Handtekening bestuur", Default, Default)
 			   _ArrayAdd($aidCheckboxes, $idOptionsSigned)
 			   GuiCtrlSetState($idOptionsSigned, $GUI_CHECKED)
@@ -322,8 +330,6 @@ Func _WinMainCreate()
 			GUICtrlCreateTabItem("Printen")
 			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("Datum", Default, Default, Default, Default, $SS_RIGHT))
 			   Global $idDatabaseDate = GUICtrlCreateDate("", Default, Default, Default, Default, $DTS_SHORTDATEFORMAT)
-			   _ArrayAdd($aidLabels, GUICtrlCreateLabel("PDF print arg.", Default, Default, Default, Default, $SS_RIGHT))
-			   Global $idDatabaseSumatraPDFArguments = GUICtrlCreateInput("", Default, Default, Default, Default)
 			   _ArrayAdd($aidControls, $idDatabaseDate)
 			   Global $idDatabaseReload = GUICtrlCreateButton("Vernieuwen", Default, Default)
 			   _ArrayAdd($aidControls, $idDatabaseReload)
@@ -478,21 +484,21 @@ Func _WinMainDraw()
 	  $iLine += 1
 	  GUICtrlSetPos($aidLabels[10], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[10], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 2
+	  $iLine += 1
 	  GUICtrlSetPos($aidLabels[11], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[11], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
+	  $iLine += 1
+	  GUICtrlSetPos($aidLabels[12], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidControls[12], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
    GUICtrlSetPos($idGroupContact, $iGroupMarginLeft + $iGroupMarginMiddleHor + $iGroupWidth1, $iGroupMarginTop, $iGroupWidth1, $iGroupHeight1)
 	  $iLabelOffsetLeft = $iGroupMarginLeft + $iGroupWidth1 + $iGroupMarginMiddleHor + $iLabelMarginLeft
 	  $iLabelOffsetTop = $iGroupMarginTop + $iLabelMarginTop
 	  $iCtrlOffsetLeft = $iLabelOffsetLeft + $iLabelWidth + $iMarginBetweenCtrlAndLabel
 	  $iCtrlOffsetTop = $iGroupMarginTop + $iCtrlMarginTop
 	  $iLine = 0
-	  GUICtrlSetPos($aidLabels[12], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
-	  GUICtrlSetPos($aidControls[12], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 2
 	  GUICtrlSetPos($aidLabels[13], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[13], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 1
+	  $iLine += 2
 	  GUICtrlSetPos($aidLabels[14], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[14], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
 	  $iLine += 1
@@ -504,15 +510,21 @@ Func _WinMainDraw()
 	  $iLine += 1
 	  GUICtrlSetPos($aidLabels[17], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[17], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 2
+	  $iLine += 1
 	  GUICtrlSetPos($aidLabels[18], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[18], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 1
+	  $iLine += 2
 	  GUICtrlSetPos($aidLabels[19], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[19], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
-	  $iLine += 2
+	  $iLine += 1
 	  GUICtrlSetPos($aidLabels[20], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($aidControls[20], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
+	  $iLine += 1
+	  GUICtrlSetPos($aidLabels[21], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidControls[21], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
+	  $iLine += 1
+	  GUICtrlSetPos($aidLabels[22], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidControls[22], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth1, $iCtrlHeight)
    GUICtrlSetPos($idGroupOptions, $iGroupMarginLeft, $iGroupHeight1 + $iGroupMarginMiddleVer + $iGroupMarginTop, $iGroupWidth2, $iGroupHeight2)
 	  $iLabelOffsetLeft = $iGroupMarginLeft + $iLabelMarginLeft
 	  $iLabelOffsetTop = $iGroupMarginTop + $iGroupHeight1 + $iGroupMarginMiddleVer + $iLabelMarginTop
@@ -529,12 +541,12 @@ Func _WinMainDraw()
 	  $iCtrlOffsetLeft = $iLabelOffsetLeft + $iLabelWidth + $iMarginBetweenCtrlAndLabel
 	  $iCtrlOffsetTop = $iGroupMarginTop + $iGroupHeight1 + $iGroupMarginMiddleVer + $iCtrlMarginTop
 	  $iLine = 0
-	  GUICtrlSetPos($aidLabels[21], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
-	  GUICtrlSetPos($aidControls[21], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth2 - $iCtrlHeight - $iCtrlMarginRight, $iCtrlHeight)
+	  GUICtrlSetPos($aidLabels[23], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidControls[23], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth2 - $iCtrlHeight - $iCtrlMarginRight, $iCtrlHeight)
 	  GUICtrlSetPos($idOptionsExplorer, $iCtrlOffsetLeft + $iCtrlWidth2 - $iCtrlHeight - $iCtrlMarginRight / 2 + 1, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlHeight + $iCtrlMarginRight / 2, $iCtrlHeight)
 	  $iLine += 1
-	  GUICtrlSetPos($aidLabels[22], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
-	  GUICtrlSetPos($aidControls[22], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth2, $iCtrlHeight)
+	  GUICtrlSetPos($aidLabels[24], $iLabelOffsetLeft, $iLabelOffsetTop + $iLineHeight * $iLine, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidControls[24], $iCtrlOffsetLeft, $iCtrlOffsetTop + $iLineHeight * $iLine, $iCtrlWidth2, $iCtrlHeight)
    GUICtrlSetPos($idConfirm, ($iWinMainWidth - $iConfirmWidth) / 2, $iGroupMarginTop + $iGroupHeight1 + $iGroupHeight2 +  $iGroupMarginMiddleVer + $iConfirmMarginTop, $iConfirmWidth, $iCtrlHeight)
    GUICtrlSetPos($idLettersSelectAll, $iCtrlMarginLeft, $iGroupMarginTop, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
    GUICtrlSetPos($idLettersSelectNone, $iCtrlMarginLeft + $iCtrlMarginMiddleHor + ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iGroupMarginTop, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
@@ -547,15 +559,13 @@ Func _WinMainDraw()
    GUICtrlSetState($idLettersSend, $GUI_DISABLE)
    GUICtrlSetPos($idListHistory, $iGroupMarginLeft, $iGroupMarginTop, $iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight, $iWinMainHeight - $iGroupMarginTop - $iGroupMarginBottom)
    If not StringCompare($sPrint, "Ja") Then
-	  GUICtrlSetPos($aidLabels[23], $iGroupMarginLeft, $iGroupMarginTop + $iLabelMarginTop - $iCtrlMarginTop, $iLabelWidth, $iCtrlHeight)
-	  GUICtrlSetPos($aidLabels[24], $iGroupMarginLeft, $iGroupMarginTop + $iLineHeight + $iLabelMarginTop - $iCtrlMarginTop, $iLabelWidth, $iCtrlHeight)
+	  GUICtrlSetPos($aidLabels[25], $iGroupMarginLeft, $iGroupMarginTop + $iLabelMarginTop - $iCtrlMarginTop, $iLabelWidth, $iCtrlHeight)
 	  GUICtrlSetPos($idDatabaseDate, $iGroupMarginLeft + $iLabelWidth + $iMarginBetweenCtrlAndLabel, $iGroupMarginTop, ($iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight - $iCtrlMarginMiddleHor) / 2 - $iLabelWidth - $iMarginBetweenCtrlAndLabel, $iCtrlHeight)
-	  GUICtrlSetPos($idDatabaseSumatraPDFArguments, $iGroupMarginLeft + $iLabelWidth + $iMarginBetweenCtrlAndLabel, $iGroupMarginTop + $iLineHeight, ($iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight - $iCtrlMarginMiddleHor) / 2 - $iLabelWidth - $iMarginBetweenCtrlAndLabel, $iCtrlHeight)
 	  GUICtrlSetPos($idDatabaseReload, $iCtrlMarginLeft + $iCtrlMarginMiddleHor + ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iGroupMarginTop, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
-	  GUICtrlSetPos($idDatabaseCount, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight * 2 + $iGroupMarginBottom + $iGroupMarginMiddleVer * 1, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
+	  GUICtrlSetPos($idDatabaseCount, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight + $iCtrlMarginMiddleVer + $iLabelMarginTop - $iCtrlMarginTop, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
 	  GUICtrlSetPos($idDatabaseSelect, $iCtrlMarginLeft + $iCtrlMarginMiddleHor + ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iGroupMarginTop + $iLineHeight, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor) / 2, $iCtrlHeight)
-	  GUICtrlSetPos($idDatabaseLettersCustomize, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight * 3 + $iGroupMarginBottom + $iGroupMarginMiddleVer * 2, $iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight, $iCtrlHeight)
-	  GUICtrlSetPos($idDatabaseLetters, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight * 4 + $iGroupMarginBottom + $iGroupMarginMiddleVer * 3, $iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight, $iWinMainHeight - $iGroupMarginTop - $iCtrlHeight * 5 - $iGroupMarginMiddleVer * 5 - $iGroupMarginBottom)
+	  GUICtrlSetPos($idDatabaseLettersCustomize, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight * 2 + $iGroupMarginBottom + $iGroupMarginMiddleVer * 1, $iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight, $iCtrlHeight)
+	  GUICtrlSetPos($idDatabaseLetters, $iGroupMarginLeft, $iGroupMarginTop + $iCtrlHeight * 3 + $iGroupMarginBottom + $iGroupMarginMiddleVer * 2, $iWinMainWidth - $iGroupMarginLeft - $iGroupMarginRight, $iWinMainHeight - $iGroupMarginTop - $iCtrlHeight * 4 - $iGroupMarginMiddleVer * 4 - $iGroupMarginBottom)
 	  GUICtrlSetPos($idDatabaseOpen, $iCtrlMarginLeft, $iWinMainHeight - $iCtrlHeight - $iGroupMarginBottom, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor * 4) / 4, $iCtrlHeight)
 	  GUICtrlSetPos($idDatabasePrint, $iCtrlMarginLeft + $iCtrlMarginMiddleHor + ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor * 3) / 4, $iWinMainHeight - $iCtrlHeight - $iGroupMarginBottom, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor * 3) / 4, $iCtrlHeight)
 	  GUICtrlSetPos($idDatabaseMarkSigned, $iCtrlMarginLeft + $iCtrlMarginMiddleHor * 2 + ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor * 3) / 4 * 2, $iWinMainHeight - $iCtrlHeight - $iGroupMarginBottom, ($iWinMainWidth - $iCtrlMarginLeft - $iCtrlMarginRight - $iCtrlMarginMiddleHor * 3) / 4, $iCtrlHeight)
@@ -679,17 +689,17 @@ EndFunc
 ; # RESET MAIN WINDOW #
 ; #####################
 Func _WinMainReset()
-   GuiCtrlSetData($idToOrg, "")
-   GuiCtrlSetData($idToSalution, "", "")
-   GuiCtrlSetData($idToSalution, $sSalutions, StringLeft($sSalutions, Not StringInStr($sSalutions, "|")? StringLen($sSalutions) : StringInStr($sSalutions, "|") - 1))
-   GuiCtrlSetData($idToFirstName, "")
-   GuiCtrlSetData($idToSurname, "")
-   GuiCtrlSetData($idToStreet, "")
-   GuiCtrlSetData($idToNumber, "")
-   GuiCtrlSetData($idToBus, "")
-   GuiCtrlSetData($idToPostcode, "")
-   GuiCtrlSetData($idToCity, "")
-   GUICtrlSetData($idToCountry, $sCountries, "België")
+   ;GuiCtrlSetData($idToOrg, "")
+   ;GuiCtrlSetData($idToSalution, "", "")
+   ;GuiCtrlSetData($idToSalution, $sSalutions, StringLeft($sSalutions, Not StringInStr($sSalutions, "|")? StringLen($sSalutions) : StringInStr($sSalutions, "|") - 1))
+   ;GuiCtrlSetData($idToFirstName, "")
+   ;GuiCtrlSetData($idToSurname, "")
+   ;GuiCtrlSetData($idToStreet, "")
+   ;GuiCtrlSetData($idToNumber, "")
+   ;GuiCtrlSetData($idToBus, "")
+   ;GuiCtrlSetData($idToPostcode, "")
+   ;GuiCtrlSetData($idToCity, "")
+   ;GUICtrlSetData($idToCountry, $sCountries, "België")
    GuiCtrlSetData($idToRef, "")
    ;GUICtrlSetData($idFromOrg, "", "")
    ;GUICtrlSetData($idFromOrg, $sOrgs, "")

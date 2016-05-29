@@ -6,7 +6,7 @@ Func _WinAbout()
 
    $sLicense = 'The MIT License (MIT)' & @CRLF & _
 			   @CRLF & _
-			   'Copyright (c) 2014-2015 Reinaert Van de Cruys' & @CRLF & _
+			   'Copyright (c) 2014-2016 Reinaert Van de Cruys' & @CRLF & _
 			   @CRLF & _
 			   'Permission is hereby granted, free of charge, to any person obtaining a copy ' & _
 			   'of this software and associated documentation files (the "Software"), to deal ' & _

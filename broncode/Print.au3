@@ -32,9 +32,7 @@ Func _Print()
    $sPrinter = _WinAPI_GetString($pDevNames + 2 * DllStructGetData($tDEVNAMES, 'DeviceOffset'))
    If DllStructGetData($tDEVNAMES, 'Default') Then
 	   $sPrinter = ""
-   EndIf
-
-   $sSumatraPDFArguments = GUICtrlRead($idDatabaseSumatraPDFArguments)
+	EndIf
 
    $bError = False
    For $j = 1 To $iCopies
