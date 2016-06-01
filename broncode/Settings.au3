@@ -112,6 +112,13 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "PrintPauze", "    =" & $iPrintPause)
    EndIf
    $iPrintPause = Int(StringInStr($iPrintPause, "|")? StringLeft($iPrintPause, StringInStr($iPrintPause, "|") - 1) : $iPrintPause)
+   ; Read print arguments.
+   Global $sSumatraPDFArguments = _ArrayToString(IniReadSection($sSettingsFile, "PrintArguments"), "", 1, 1, "|", 1, 1)
+   If @error Then
+	  $sSumatraPDFArguments = ""
+	  IniWriteSection($sSettingsFile, "PrintArguments", "    =" & $sSumatraPDFArguments)
+   EndIf
+   $sSumatraPDFArguments = StringInStr($sSumatraPDFArguments, "|")? StringLeft($sSumatraPDFArguments, StringInStr($sSumatraPDFArguments, "|") - 1) : $sSumatraPDFArguments
    ; Read font size.
    Global $sFontSize = _ArrayToString(IniReadSection($sSettingsFile, "Lettergrootte"), "", 1, 1, "|", 1, 1)
    If @error Or Not StringCompare($sFontSize, "") Then
@@ -126,13 +133,13 @@ Func _ReadSettings()
 	  ;IniWrite($sSettingsFile, "Beeld", "Thema", $sTheme)
    ;EndIf
    ; Read salutions.
-   Global $sSalutions = _ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1, 1, "|", 1, 1)
+   Global $sSalutions = _ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1, 0, "|", 1, 1)
    If @error Or Not StringCompare($sSalutions, "") Then
 	  $sSalutions = "geachte heer|geachte mevrouw|geachte"
 	  IniWriteSection($sSettingsFile, "Aansprekingen", "    =" & StringReplace($sSalutions, "|", @LF & "    ="))
    EndIf
    ; Read 'Gemeente' departments.
-   Global $sGemeente = _ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1, 1, "|", 1, 1)
+   Global $sGemeente = _ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1, 0, "|", 1, 1)
    If @error Or Not StringCompare($sGemeente, "") Then
 	  $sGemeente = "archief|" & _
 				   "burgemeester|" & _
@@ -165,7 +172,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "Gemeente", "    =" & StringReplace($sGemeente, "|", @LF & "    ="))
    EndIf
    ; Read 'OCMW' departments.
-   Global $sOCMW = _ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1, 1, "|", 1, 1)
+   Global $sOCMW = _ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1, 0, "|", 1, 1)
    If @error Or Not StringCompare($sOCMW, "") Then
 	  $sOCMW = "de dreef|" & _
 			   "dienst financiën|" & _
@@ -182,7 +189,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "OCMW", "    =" & StringReplace($sOCMW, "|", @LF & "    ="))
    EndIf
    ; Read 'AGB' departments.
-   Global $sAGB = _ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1, 1, "|", 1, 1)
+   Global $sAGB = _ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1, 0, "|", 1, 1)
    If @error Or Not StringCompare($sAGB, "") Then
 	  $sAGB = "directiecomité|" & _
 			  "raad van bestuur"
@@ -331,6 +338,44 @@ Func _ReadSettings()
 		 EndIf
 	  WEnd
    EndIf
+EndFunc
+
+Func _ResetTo()
+   GUICtrlSetData($idToOrg, "")
+   GUICtrlSetData($idToSalution, "geachte")
+   GUICtrlSetData($idToFirstName, "")
+   GUICtrlSetData($idToSurname, "")
+   GUICtrlSetData($idToStreet, "")
+   GUICtrlSetData($idToNumber, "")
+   GUICtrlSetData($idToBus, "")
+   GUICtrlSetData($idToPostcode, "")
+   GUICtrlSetData($idToCity, "")
+   GUICtrlSetData($idToCountry, "België")
+   IniWrite($sSettingsFile, "Bestemmeling", "Organisatie", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Aanspreking", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Voornaam", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Achternaam", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Straatnaam", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Huisnummer", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Bus", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Postcode", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Gemeente", "")
+   IniWrite($sSettingsFile, "Bestemmeling", "Land", "België")
+EndFunc
+
+Func _ResetFrom()
+   GUICtrlSetData($idFromOrg, "Gemeente")
+   GUICtrlSetData($idFromFirstName, "")
+   GUICtrlSetData($idFromSurname, "")
+   GUICtrlSetData($idFromDepartment, $sGemeente, StringLeft($sGemeente, Not StringInStr($sGemeente, "|")? StringLen($sGemeente) : StringInStr($sGemeente, "|") - 1))
+   GUICtrlSetData($idFromTel, "")
+   GUICtrlSetData($idFromEmail, "")
+   IniWrite($sSettingsFile, "Afzender", "Organisatie", "")
+   IniWrite($sSettingsFile, "Afzender", "Voornaam", "")
+   IniWrite($sSettingsFile, "Afzender", "Achternaam", "")
+   IniWrite($sSettingsFile, "Afzender", "Dienst", "")
+   IniWrite($sSettingsFile, "Afzender", "Telefoon", "")
+   IniWrite($sSettingsFile, "Afzender", "Email", "")
 EndFunc
 
 

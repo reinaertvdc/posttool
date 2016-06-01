@@ -19,6 +19,15 @@ Func _ControlMainLoop()
    EndIf
    ;GUICtrlSetData($idFromRef, IniRead($sSettingsFile, "Afkortingen" & GUICtrlRead($idFromOrg), GUICtrlRead($idFromDepartment), "___") & "/" & StringLower(StringCompare(GUICtrlRead($idFromFirstName), "") ? GUICtrlRead($idFromFirstName) : "___") & "/" & "#ID")
 
+   IniReadSection($sSettingsFile, "Bestemmeling")
+   If @error Then
+	  _ResetTo()
+   EndIf
+   IniReadSection($sSettingsFile, "Afzender")
+   If @error Then
+	  _ResetFrom()
+   EndIf
+
    While True
 	  $iMsg = GUIGetMsg()
 	  If $iMsg Then
@@ -46,7 +55,7 @@ Func _ControlMainLoop()
 			Case $idAbout
 			   _WinAbout()
 			Case $idToPostcode
-			   If Not StringCompare(GUICtrlRead($idToCity), "") And Not StringCompare(GUICtrlRead($idToCountry), "België") Then
+			   If Not StringCompare(GUICtrlRead($idToCountry), "België") Then
 				  $iIndex = _ArraySearch($aPostcodes, GUICtrlRead($idToPostcode), Default, Default, Default, Default, Default, 0)
 				  If $iIndex >= 0 Then GUICtrlSetData($idToCity, $aPostcodes[$iIndex][1])
 				  EndIf
@@ -89,39 +98,9 @@ Func _ControlMainLoop()
 			   GUICtrlSetData($idOptionsAnnex, FileOpenDialog("Bijlage kiezen", "::{450D8FBA-AD25-11D0-98A8-0800361B1103}", "PDF (*.pdf)", $FD_FILEMUSTEXIST + $FD_PATHMUSTEXIST, "", $hWinMain))
 			   FileChangeDir($sWorkingDir)
 			Case $idToClear
-			   GUICtrlSetData($idToOrg, "")
-			   GUICtrlSetData($idToSalution, "geachte")
-			   GUICtrlSetData($idToFirstName, "")
-			   GUICtrlSetData($idToSurname, "")
-			   GUICtrlSetData($idToStreet, "")
-			   GUICtrlSetData($idToNumber, "")
-			   GUICtrlSetData($idToBus, "")
-			   GUICtrlSetData($idToPostcode, "2260")
-			   GUICtrlSetData($idToCity, "Westerlo")
-			   GUICtrlSetData($idToCountry, "België")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Organisatie", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Aanspreking", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Voornaam", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Achternaam", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Straatnaam", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Huisnummer", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Bus", "")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Postcode", "2260")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Gemeente", "Westerlo")
-			   IniWrite($sSettingsFile, "Bestemmeling", "Land", "België")
+			   _ResetTo()
 			Case $idFromClear
-			   GUICtrlSetData($idFromOrg, "Gemeente")
-			   GUICtrlSetData($idFromFirstName, "")
-			   GUICtrlSetData($idFromSurname, "")
-			   GUICtrlSetData($idFromDepartment, $sGemeente, StringLeft($sGemeente, Not StringInStr($sGemeente, "|")? StringLen($sGemeente) : StringInStr($sGemeente, "|") - 1))
-			   GUICtrlSetData($idFromTel, "")
-			   GUICtrlSetData($idFromEmail, "")
-			   IniWrite($sSettingsFile, "Afzender", "Organisatie", "")
-			   IniWrite($sSettingsFile, "Afzender", "Voornaam", "")
-			   IniWrite($sSettingsFile, "Afzender", "Achternaam", "")
-			   IniWrite($sSettingsFile, "Afzender", "Dienst", "")
-			   IniWrite($sSettingsFile, "Afzender", "Telefoon", "")
-			   IniWrite($sSettingsFile, "Afzender", "Email", "")
+			   _ResetFrom()
 			Case $idConfirm
 			   _WinMainRead()
 			   If _FormCheck() Then

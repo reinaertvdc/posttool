@@ -633,6 +633,7 @@ Func _WinMainLoadHistory()
    If Not FileExists(@ScriptDir & "\geschiedenis.txt") Then _FileCreate(@ScriptDir & "\geschiedenis.txt")
    $hHistory = FileOpen(@ScriptDir & "\geschiedenis.txt", $FO_UNICODE)
    If Not @error Then
+	  _GUICtrlListView_DeleteAllItems(GUICtrlGetHandle($idListHistory))
 	  While 1
 		 $sTemp = FileReadLine($hHistory)
 		 If @error Then
