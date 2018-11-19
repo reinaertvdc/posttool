@@ -133,13 +133,13 @@ Func _ReadSettings()
 	  ;IniWrite($sSettingsFile, "Beeld", "Thema", $sTheme)
    ;EndIf
    ; Read salutions.
-   Global $sSalutions = _ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1, 0, "|", 1, 1)
+   Global $sSalutions = StringReplace(_ArrayToString(IniReadSection($sSettingsFile, "Aansprekingen"), "", 1), @CRLF, "|")
    If @error Or Not StringCompare($sSalutions, "") Then
 	  $sSalutions = "geachte heer|geachte mevrouw|geachte"
 	  IniWriteSection($sSettingsFile, "Aansprekingen", "    =" & StringReplace($sSalutions, "|", @LF & "    ="))
    EndIf
    ; Read 'Gemeente' departments.
-   Global $sGemeente = _ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1, 0, "|", 1, 1)
+   Global $sGemeente = StringReplace(_ArrayToString(IniReadSection($sSettingsFile, "Gemeente"), "", 1), @CRLF, "|")
    If @error Or Not StringCompare($sGemeente, "") Then
 	  $sGemeente = "archief|" & _
 				   "burgemeester|" & _
@@ -172,7 +172,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "Gemeente", "    =" & StringReplace($sGemeente, "|", @LF & "    ="))
    EndIf
    ; Read 'OCMW' departments.
-   Global $sOCMW = _ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1, 0, "|", 1, 1)
+   Global $sOCMW = StringReplace(_ArrayToString(IniReadSection($sSettingsFile, "OCMW"), "", 1), @CRLF, "|")
    If @error Or Not StringCompare($sOCMW, "") Then
 	  $sOCMW = "de dreef|" & _
 			   "dienst financiën|" & _
@@ -189,7 +189,7 @@ Func _ReadSettings()
 	  IniWriteSection($sSettingsFile, "OCMW", "    =" & StringReplace($sOCMW, "|", @LF & "    ="))
    EndIf
    ; Read 'AGB' departments.
-   Global $sAGB = _ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1, 0, "|", 1, 1)
+   Global $sAGB = StringReplace(_ArrayToString(IniReadSection($sSettingsFile, "AGB"), "", 1), @CRLF, "|")
    If @error Or Not StringCompare($sAGB, "") Then
 	  $sAGB = "directiecomité|" & _
 			  "raad van bestuur"

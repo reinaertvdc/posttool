@@ -2,7 +2,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2016 Reinaert Van de Cruys
+Copyright (c) 2014-2019 Reinaert Van de Cruys
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ SOFTWARE.
 #pragma compile(LegalTrademarks,      ""                                                                             )
 #pragma compile(OriginalFilename,     ""                                                                             )
 #pragma compile(ProductName,          "Postcentrale"                                                                 )
-#pragma compile(ProductVersion,       "0.16"                                                                         )
+#pragma compile(ProductVersion,       "0.17"                                                                         )
 
 Global $sProgramLogo = _TempFile()
 FileInstall("resources\postcentrale.ico", $sProgramLogo)
